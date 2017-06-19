@@ -13,10 +13,10 @@
     "url": "https://github.com/catalin-luntraru/redux-minimal"
   },
   "scripts": {
-    "start":"npm test && npm run build-prod && npm run server",
+    "start":"npm run build-prod && npm run server",
     "dev": "webpack-dev-server --inline --hot --history-api-fallback --host localhost --port 8080",
-    "build-dev": "webpack --config webpack.dev.config.js",
-    "build-prod": "webpack -p --config webpack.prod.config.js",
+    "build-dev": "npm test && webpack --config webpack.dev.config.js",
+    "build-prod": "npm test && webpack -p --config webpack.prod.config.js",
     "test": "jest --verbose",
     "test-watch": "npm test -- --watchAll",
     "server": "node server.js"
