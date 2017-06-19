@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var getHotelData = function (fileName="./model/data.json") {
+var getHotelData = function (fileName) {
         var hotelList = JSON.parse(fs.readFileSync(fileName, 'utf8'));
         return hotelList;
   }
