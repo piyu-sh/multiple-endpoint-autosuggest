@@ -8,7 +8,26 @@ Install the dependencies.
 npm install
 ```
  
-Build
+Usage
+---
+ 
+Start the server with this command:
+This runs tests, prepares production build and runs server
+ 
+```
+npm start
+```
+
+Access the application at
+ 
+```
+http://localhost:3000
+```
+Data can be changed at src\api\model\data.json.
+Server must be restarted if data is changed.
+
+
+Additional Commands
 ---
 
 
@@ -28,25 +47,8 @@ Runs tests and if successfull, prepares production build
 npm run build-prod
 ```
 
-Usage
----
- 
-Start the server with this command:
-This runs tests, prepares production build and runs server
- 
-```
-npm start
-```
-
 Run test cases:
  
 ```
 npm test
 ```
-
-Access the application at
- 
-```
-http://localhost:3000
-```
-Data can be changed at src\api\model\data.json
