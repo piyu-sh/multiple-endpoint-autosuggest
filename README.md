@@ -1,5 +1,9 @@
 Welcome.
  
+Prerequisites
+---
+mongodb must be installed
+
 Setup
 ---
 
@@ -50,6 +54,13 @@ Run test cases:
  
 ```
 npm test
+```
+
+Start database:
+
+```
+npm run db
+npm run db-data
 ```
 
 Node API 
