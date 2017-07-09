@@ -19,8 +19,17 @@ Usage
 Start database:
 
 ```
+
+for windows
+---
+npm run db 
 npm run db-data
-npm run db
+
+for linux
+---
+sudo service mongod start
+npm run db-data
+
 ```
 
 Start the server with this command:
