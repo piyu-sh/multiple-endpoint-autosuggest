@@ -23,13 +23,19 @@ if (process.env.NODE_ENV !== 'production') {
 let middleware = applyMiddleware(...middlewares);
 
 // add the redux dev tools
-if (process.env.NODE_ENV !== 'production' && window.devToolsExtension) {
+if (process.env.NODE_ENV !== 'production' && typeof(window) !== 'undefined' && window.devToolsExtension) {
   middleware = compose(middleware, window.devToolsExtension());
 }
 
+// Pick up any initial state sent by the server
+const initialState = typeof(window) !== 'undefined' ?window.__REDUX_STATE__ : {}
+
 // create the store
-const store = createStore(reducers, middleware);
-const history = syncHistoryWithStore(browserHistory, store);
+const store = createStore(reducers,initialState, middleware);
+let history = browserHistory
+if (typeof(window) !== 'undefined') {
+    history = syncHistoryWithStore(browserHistory, initialState)
+  }
 
 // export
 export { store, history };

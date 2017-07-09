@@ -19,7 +19,7 @@
     "build-prod": "npm test && webpack -p --config webpack.prod.config.js",
     "test": "jest --verbose",
     "test-watch": "npm test -- --watchAll",
-    "server": "node server.js"
+    "server": "babel-node server.js"
   },
   "babel": {
     "presets": [
@@ -31,9 +31,12 @@
   "author": "Catalin Luntraru",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-css-modules-transform": "^1.2.7",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "fs": "0.0.1-security",
+    "node-sass": "^4.5.3",
     "react": "^15.4.2",
     "react-autosuggest": "^9.1.0",
     "react-bootstrap": "^0.30.7",
@@ -45,7 +48,8 @@
     "redux": "^3.6.0",
     "redux-form": "^6.4.3",
     "redux-saga": "^0.14.3",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "sass-loader": "^4.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",

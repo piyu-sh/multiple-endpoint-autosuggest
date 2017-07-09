@@ -1,45 +1,69 @@
-var express = require('express');
-const path = require('path');
-autocomplete=require('./src/api/autocomplete');
+import express from 'express'  
+import { match } from 'react-router'  
+import { renderToString } from 'react-dom/server'  
+import { RouterContext } from 'react-router'  
+import { createStore, applyMiddleware } from 'redux'  
+import thunkMiddleware from 'redux-thunk'  
+import { Provider } from 'react-redux'  
+import { router } from './src/components/App/router.js'  
+import {reducers} from './src/components/App/reducers.js'
+import autocomplete from './src/api/autocomplete.js';
+import React, { Component } from 'react';
 
-
-var app = express();
-
-var bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
-// // Add headers
-// app.use(function (req, res, next) {
-
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
-
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', 'GET');
-
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-
-//     // Pass to next layer of middleware
-//     next();
-// });
+const host = "0.0.0.0";
+const port = process.env.PORT || 3000;
+const app = express()
 
 var hotelList=autocomplete.getHotelData("./src/api/model/data.json");
 
 app.get('/autocomplete/:search',function(req,res){
     res.json(autocomplete.findByQuery(hotelList,req.params.search))
 });
+app.use(express.static('public')) ;
+app.get('*', (req, res) => {
+  // match the routes to the url
+  match({ routes: router, location: req.url }, (err, redirect, props) => {
 
-app.get('*', function(request, response) {
-    response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+    const store = createStore(reducers, applyMiddleware(thunkMiddleware))
+
+    const appHtml = renderToString(
+              <Provider store={store}>
+               <RouterContext {...props} />
+             </Provider>)
+     const state = store.getState()
+
+    res.send(`
+    <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                <title>Autosuggest with multiple api endpoints</title>
+
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+                    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+                    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+                <link rel="stylesheet" href="/css/main.css">
+                </head>
+                <body>
+
+                <div id="app">${appHtml}</div>
+                <script>window.__REDUX_STATE__ = ${JSON.stringify(state)}</script>
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBs-hkYVONHPp5NjKuPSbWZqhY6vxa55-k&libraries=places"></script>
+                <script src="/js/bundle.js"></script>
+                </body>
+    </html>
+   `);
+  })
 })
-var server = app.listen(3000, function() {
-    var host = "localhost";
-    var port = "3000";
+
+
+var server = app.listen(port,host, function() {
     console.log('app listening at http://%s:%s', host, port);
 });
