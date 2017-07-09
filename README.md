@@ -14,7 +14,15 @@ npm install
  
 Usage
 ---
- 
+
+
+Start database:
+
+```
+npm run db-data
+npm run db
+```
+
 Start the server with this command:
  
 ```
@@ -54,13 +62,6 @@ Run test cases:
  
 ```
 npm test
-```
-
-Start database:
-
-```
-npm run db
-npm run db-data
 ```
 
 Node API 
