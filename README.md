@@ -43,8 +43,6 @@ Access the application at
 ```
 http://localhost:3000
 ```
-Data can be changed at src\api\model\data.json.
-Server must be restarted if data is changed.
 
 
 Additional Commands
