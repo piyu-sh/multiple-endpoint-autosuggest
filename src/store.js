@@ -34,7 +34,7 @@ const initialState = typeof(window) !== 'undefined' ?window.__REDUX_STATE__ : {}
 const store = createStore(reducers,initialState, middleware);
 let history = browserHistory
 if (typeof(window) !== 'undefined') {
-    history = syncHistoryWithStore(browserHistory, initialState)
+    history = syncHistoryWithStore(browserHistory, store)
   }
 
 // export

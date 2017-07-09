@@ -5,7 +5,7 @@ import { RouterContext } from 'react-router'
 import { createStore, applyMiddleware } from 'redux'  
 import thunkMiddleware from 'redux-thunk'  
 import { Provider } from 'react-redux'  
-import { router } from './src/components/App/router.js'  
+import { router } from './src/router.js'  
 import {reducers} from './src/components/App/reducers.js'
 import autocomplete from './src/api/autocomplete.js';
 import React, { Component } from 'react';

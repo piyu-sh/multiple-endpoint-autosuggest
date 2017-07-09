@@ -1,10 +1,4 @@
 {
   "presets":["es2015", "stage-0", "react"],
-  "plugins": ["transform-object-rest-spread",
-                    ["css-modules-transform", {
-                        "preprocessCss": "./src/sass-loader.js",
-                        "generateScopedName": "[hash:8]",
-                        "extensions": [".scss"]
-                    }]
-              ]
+  "plugins": ["transform-object-rest-spread"]
 }

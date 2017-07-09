@@ -3,7 +3,7 @@ Welcome.
 Setup
 ---
 
-Install the dependencies.
+Install the dependencies and runs production build on postintall
 ```
 npm install
 ```
@@ -12,7 +12,6 @@ Usage
 ---
  
 Start the server with this command:
-This runs tests, prepares production build and runs server
  
 ```
 npm start
@@ -41,7 +40,7 @@ npm run build-dev
 
 Production
 
-Runs tests and if successfull, prepares production build
+Prepares production build
 
 ```
 npm run build-prod
