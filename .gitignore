@@ -4,3 +4,6 @@ public/js/
 public/css/
 .vscode/
 npm-debug.log*
+mongodb/data/*
+!mongodb/data/README.md
+mongodb/logs/mongo.log.*

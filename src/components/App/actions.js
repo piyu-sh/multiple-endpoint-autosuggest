@@ -13,7 +13,7 @@ export function loadSuggestions(value) {
 }
 
 function getPredictions(dispatch,value){
-  var request = '/autocomplete/'+ value
+  var request = '/hotels/'+ value
   fetch(request).then(
     response => response.json()
   ).then(

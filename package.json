@@ -20,7 +20,9 @@
     "build-prod": "webpack -p --config webpack.prod.config.js",
     "test": "jest --verbose",
     "test-watch": "npm test -- --watchAll",
-    "server": "node index.js"
+    "server": "node index.js",
+    "db" : "mongod --config mongodb.conf",
+    "db-data" : "mongorestore -d Hotelsdb mongodb/sampledata/Hotelsdb/hotels.bson"
   },
   "babel": {
     "presets": [
@@ -38,6 +40,8 @@
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "fs": "0.0.1-security",
+    "mongodb": "^2.2.30",
+    "mongoose": "^4.11.1",
     "node-sass": "^4.5.3",
     "react": "^15.4.2",
     "react-autosuggest": "^9.1.0",

@@ -51,3 +51,15 @@ Run test cases:
 ```
 npm test
 ```
+
+Node API 
+
+```
+Post man can be used to list, create, update, delete and find hotels
+
+GET at localhost:3000/hotels list all hotels
+POST at localhost:3000/hotels, click body and select “x-www-form-urlencoded”, fill "name" and "location" as keys, and send 
+GET at localhost:3000/hotels/hotelName gets hotels containing hotelName in "name" of hotels
+PUT at localhost:3000/hotels/hotelId and select “x-www-form-urlencoded”, fill "name" and "location" as keys, and send to update hotel 
+DELETE at localhost:3000/hotels/hotelId deletes hotel with hotelId
+```

@@ -7,18 +7,30 @@ import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'  
 import { router } from './src/router.js'  
 import {reducers} from './src/components/App/reducers.js'
-import autocomplete from './src/api/autocomplete.js';
 import React, { Component } from 'react';
 
 const host = "0.0.0.0";
 const port = process.env.PORT || 3000;
 const app = express()
 
-var hotelList=autocomplete.getHotelData("./src/api/model/data.json");
+import mongoose from 'mongoose';
+import hotels from  './src/api/model/model';
+import bodyParser from 'body-parser';
 
-app.get('/autocomplete/:search',function(req,res){
-    res.json(autocomplete.findByQuery(hotelList,req.params.search))
-});
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/Hotelsdb', {
+  useMongoClient: true,
+  /* other options */
+}); 
+
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+var routes = require('./src/api/routes/routes');
+routes(app);
+
 app.use(express.static('public')) ;
 app.get('*', (req, res) => {
   // match the routes to the url
